@@ -1,4 +1,4 @@
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  1
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -20,134 +20,137 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00005                         ;Espaço das variáveis
 Warning[207]: Found label after column 1. (num_acc)
   00000020            00006                         num_acc equ       0x20 ;pode declarar variáveis em 0x21, 0x22 ...
-                      00007                         
-                      00008 ;----------------------------------------------------------------------------------------------
-                      00009 ;Não editar esta seção
-                      00010 ;----------------------------------------------------------------------------------------------         
+                      00007 ;----------------------------------------------------------------------------------------------
+                      00008 ;Não editar esta seção
+                      00009 ;----------------------------------------------------------------------------------------------         
                                     
-                      00011                         ;endereço de inicio do programa
-0000                  00012                         org     00 ;origem no endereço 0
-                      00013                         
-0000   0103           00014 setports    clrw                    ; Zero em W.
-0001   0085           00015             movwf   PORTA           ; certifica que PORTA é zero antes de habilita-la.
-0002   0086           00016             movwf   PORTB           ; certifica que PORTB é zero antes de habilita-la.
-                      00017                         
-                      00018             
-0003   1683           00019                         bsf     STATUS,RP0      ; Seleciona o Banco 1 (banco do TRIS)
-                      00020             
-                      00021                         ;Setando entradas e saidas
-0004   3060           00022                         movlw   b'01100000'
+                      00010                         ;endereço de inicio do programa
+0000                  00011                         org     00 ;origem no endereço 0
+                      00012                         
+0000   0103           00013 setports    clrw                    ; Zero em W.
+0001   0085           00014             movwf   PORTA           ; certifica que PORTA é zero antes de habilita-la.
+0002   0086           00015             movwf   PORTB           ; certifica que PORTB é zero antes de habilita-la.
+                      00016                         
+                      00017             
+0003   1683           00018                         bsf     STATUS,RP0      ; Seleciona o Banco 1 (banco do TRIS)
+                      00019             
+                      00020                         ;Setando entradas e saidas
+0004   3060           00021                         movlw   b'01100000'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0086           00023                         movwf   TRISB
-0006   3000           00024                         movlw   b'00000000'
+0005   0086           00022                         movwf   TRISB
+0006   3000           00023                         movlw   b'00000000'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0085           00025                         movwf   TRISA
-0008   1283           00026             bcf         STATUS,RP0      ; Reseleciona o Banco 0 (banco do PORT).
+0007   0085           00024                         movwf   TRISA
+0008   1283           00025             bcf         STATUS,RP0      ; Reseleciona o Banco 0 (banco do PORT).
+                      00026                         
                       00027                         
-                      00028                         
-                      00029 ;---------------------------------------------------------------------------------------------
-                      00030 ;Desenvolver código a partir daqui
-                      00031 ;---------------------------------------------------------------------------------------------          
+                      00028 ;---------------------------------------------------------------------------------------------
+                      00029 ;Desenvolver código a partir daqui
+                      00030 ;---------------------------------------------------------------------------------------------          
                                     
-0009   01A0           00032                     clrf num_acc ;zera valor do contador
-                      00033 ;Estado Inicial                 
-000A                  00034 inicial         
-000A   1405           00035                         bsf             PORTA,0 ;Liga apenas o led vermelho
-000B   1085           00036                         bcf             PORTA,1 ;Desliga apenas o led verde
-                      00037 
-000C   1A86           00038                         btfsc   PORTB,5 ;Verifica se a chave 'sensor' foi ligada
-000D   2011           00039                         call    passar  ;Se foi pressionado, vá para o estado passar
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  2
+0009   01A0           00031                     clrf num_acc ;zera valor do contador
+                      00032 ;Estado Inicial                 
+000A                  00033 inicial         
+000A   1405           00034                         bsf             PORTA,0 ;Liga apenas o led vermelho / Endereço igual a 1 lógico
+000B   1085           00035                         bcf             PORTA,1 ;Desliga apenas o led verde / Endereço igual a 0 lógico
+                      00036 
+000C   1A86           00037                         btfsc   PORTB,5 ;Verifica se a chave 'sensor' foi ligada / se for 0 lógico ele p
+                            ula uma instução
+000D   2011           00038                         call    passar  ;Se foi pressionado, vá para o estado passar
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000E   1B06           00040                         btfsc   PORTB,6 ;Verifica se a chave 'manutencao' foi ligada                    
-                                                    
-000F   2017           00041                         call    manutencao
-                      00042 
-0010   280A           00043                         goto    inicial
-                      00044                         
-                      00045 
-0011   1005           00046 passar          bcf             PORTA,0 ;Desliga apenas o led vermelho (conectado ao RA0)
-0012   1485           00047                         bsf             PORTA,1 ;Liga apenas o led verde (conectado ao RA1)
+000E   1B06           00039                         btfsc   PORTB,6 ;Verifica se a chave 'manutencao' foi ligado / se for 1 lógico e
+                            le pula uma instução
+000F   2017           00040                         call    manutencao ; chama a função de manutenção
+                      00041 
+0010   280A           00042                         goto    inicial ; retorna para inicial
+                      00043                         
+                      00044 
+0011   1005           00045 passar          bcf             PORTA,0 ;Desliga apenas o led vermelho (conectado ao RA0) / seta 0 lógic
+                            o
+0012   1485           00046                         bsf             PORTA,1 ;Liga apenas o led verde (conectado ao RA1) / seta 1 lóg
+                            ico
 Message[305]: Using default destination of 1 (file).
-0013   0AA0           00048                         incf    num_acc ;incrementa 1 sempre que o botão é ligado
-                      00049 
-0014                  00050 passar_loop                     
-0014   1E86           00051                         btfss   PORTB,5 ;checa se o botão do 'sensor' permanece ligado
-0015   0008           00052                         return                  ;se não permanece, retorne a subrotina de origem        
-                                            
-                      00053 
-0016   2814           00054                         goto    passar_loop
+0013   0AA0           00047                         incf    num_acc ;incrementa 1 sempre que o botão é ligado
+                      00048 
+0014                  00049 passar_loop                     
+0014   1E86           00050                         btfss   PORTB,5 ;checa se o botão do 'sensor' permanece ligado / verifica se o v
+                            alor lógico é 1 caso seja pula uma linha
+0015   0008           00051                         return                  ;se não permanece, retorne a subrotina de origem
+                      00052 
+0016   2814           00053                         goto    passar_loop ; retorna para passar_loop
+                      00054 
                       00055 
-                      00056 
-0017   1005           00057 manutencao  bcf   PORTA,0; Desliga led vermelho
-0018   1085           00058                         bcf   PORTA,1; Desliga led verde
-0019   2027           00059                         call cmp
-                      00060 
-001A                  00061 manutencao_loop
-001A   1F06           00062                         btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
-001B   0008           00063                         return; Verificação da variavel 0x20
-                      00064 
-001C   281A           00065                         goto manutencao_loop
-                      00066 
-001D   1005           00067 apagaLed        bcf   PORTA,0;liga led vermelho
-001E   1085           00068                         bcf   PORTA,1;liga led verde
-                      00069 
-001F                  00070 apagaLed_loop
-001F   1F06           00071                         btfss PORTB,6;checa se o botão do 'manutenção' permanece ligado
-0020   0008           00072                         return;verificação da variavel 0x20
-                      00073                         
-0021   281F           00074                         goto apagaLed_loop
-                      00075 
-0022   1405           00076 acendeLed       bsf   PORTA,0;liga led vermelho
-0023   1485           00077                         bsf   PORTA,1;liga led verde
-                      00078 
-0024                  00079 acendeLed_loop
-0024   1F06           00080                 btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
-0025   201D           00081                 call apagaLed;verificação da variavel 0x20
-                      00082                 
-0026   2824           00083                 goto acendeLed_loop
-                      00084 
+0017   1005           00056 manutencao  bcf   PORTA,0; Desliga led vermelho / seta o valor lógico 0
+0018   1085           00057                         bcf   PORTA,1; Desliga led verde / seta o valor lógico 0
+0019   2029           00058                         call cmp ; chama a função de comparação de números
+                      00059 
+001A                  00060 manutencao_loop
+001A   1F06           00061                         btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
+001B   0008           00062                         return; retorna para a subrotina
+                      00063 
+001C   281A           00064                         goto manutencao_loop ; retorna para manutenção_loop
+                      00065 
+001D   1005           00066 apagaLed        bcf   PORTA,0; liga led vermelho
+001E   1085           00067                         bcf   PORTA,1; liga led verde
+001F   1F06           00068                         btfss PORTB,6; verifica se o valor lógico é 1 caso seja pula uma linha
+0020   280A           00069                         goto  inicial ; retorna para inicial
+                      00070                                 
+0021                  00071 apagaLed_loop
+0021   1F06           00072                         btfss PORTB,6; checa se o botão do 'manutenção' permanece ligado
+0022   0008           00073                         return; retorna para a subrotina
+                      00074                         
+0023   2821           00075                         goto apagaLed_loop
+                      00076 
+0024   1405           00077 acendeLed       bsf   PORTA,0;liga led vermelho
+0025   1485           00078                         bsf   PORTA,1;liga led verde
+                      00079 
+0026                  00080 acendeLed_loop
+0026   1F06           00081                         btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
+0027   201D           00082                         call apagaLed; chama a função apagaLed
+                      00083                 
+0028   2826           00084                         goto acendeLed_loop ; retorna para acender_loop
                       00085 
-                      00086 
-                      00087 ;---------------------------------------------------------------------------------------------          
-                                    
-                      00088 ;Função para a comparação da magnitude de dois números
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  3
+                      00086 ;---------------------------------------------------------------------------------------------          
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00089 ;---------------------------------------------------------------------------------------------
-                      00090 ;quando retornar da função cmp, o registrador w terá o valor:
-                      00091 ;
-                      00092 ;w=0 (quando num_acc for menor ou igual a 10)
-                      00093 ;ou
-                      00094 ;w=1 (quando num_acc for maior que 10)
-                      00095 
-0027                  00096 cmp
-0027   300A           00097                         movlw D'10'
-0028   0220           00098                         subwf num_acc,0
-0029   1903           00099                         btfsc STATUS,Z
-002A   282D           00100                         goto  menor_igual
-002B   1803           00101                         btfsc STATUS,C
-002C   282F           00102                         goto  maior
-                      00103                         ;se chegar aqui 'num_acc' é menor que 10
-                      00104                         ;retlw 0
-002D                  00105 menor_igual
-002D   201D           00106                         call apagaLed
-002E   3400           00107                         retlw 0 ;retorna da função com o w_reg com valor 0
-                      00108 
-002F                  00109 maior
-002F   2022           00110                         call acendeLed
-0030   3401           00111                         retlw 1 ;retorna da função com o w_reg com valor 1
+                                    
+                      00087 ;Função para a comparação da magnitude de dois números
+                      00088 ;---------------------------------------------------------------------------------------------
+                      00089 ;quando retornar da função cmp, o registrador w terá o valor:
+                      00090 ;
+                      00091 ;w=0 (quando num_acc for menor ou igual a 10)
+                      00092 ;ou
+                      00093 ;w=1 (quando num_acc for maior que 10)
+                      00094 
+0029                  00095 cmp
+0029   300A           00096                         movlw D'10'
+002A   0220           00097                         subwf num_acc,0
+002B   1903           00098                         btfsc STATUS,Z
+002C   282F           00099                         goto  menor_igual
+002D   1803           00100                         btfsc STATUS,C
+002E   2831           00101                         goto  maior
+                      00102                         ;se chegar aqui 'num_acc' é menor que 10
+                      00103                         ;retlw 0
+002F                  00104 menor_igual
+002F   201D           00105                         call apagaLed ; goto
+0030   3400           00106                         retlw 0 ;retorna da função com o w_reg com valor 0
+                      00107 
+0031                  00108 maior
+0031   2024           00109                         call acendeLed ; goto
+0032   3401           00110                         retlw 1 ;retorna da função com o w_reg com valor 1
+                      00111 
                       00112                         
                       00113             END
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  4
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  4
 
 
 SYMBOL TABLE
@@ -206,7 +209,7 @@ T0IE                              00000005
 T0IF                              00000002
 T0SE                              00000004
 TMR0                              00000001
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  5
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  5
 
 
 SYMBOL TABLE
@@ -257,22 +260,22 @@ _WDT_OFF                          00003FFB
 _WDT_ON                           00003FFF
 _XT_OSC                           00003FFD
 __16F84A                          00000001
-acendeLed                         00000022
-acendeLed_loop                    00000024
+acendeLed                         00000024
+acendeLed_loop                    00000026
 apagaLed                          0000001D
-apagaLed_loop                     0000001F
-cmp                               00000027
+apagaLed_loop                     00000021
+cmp                               00000029
 inicial                           0000000A
-maior                             0000002F
+maior                             00000031
 manutencao                        00000017
-MPASM  5.46                           COD.ASM   3-31-2016  14:09:41         PAGE  6
+MPASM  5.46                           COD.ASM   3-31-2016  18:34:56         PAGE  6
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 manutencao_loop                   0000001A
-menor_igual                       0000002D
+menor_igual                       0000002F
 num_acc                           00000020
 passar                            00000011
 passar_loop                       00000014
@@ -281,12 +284,12 @@ setports                          00000000
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
-0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X---------------
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXX-------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    49
-Program Memory Words Free:   975
+Program Memory Words Used:    51
+Program Memory Words Free:   973
 
 
 Errors   :     0

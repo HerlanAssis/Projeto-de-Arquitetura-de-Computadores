@@ -1,35 +1,35 @@
 MPLINK 4.43, Linker
-Linker Map File - Created Thu Mar 31 14:09:42 2016
+Linker Map File - Created Thu Mar 31 18:34:57 2016
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x000062
+                   .org_1       code   0x000000    program   0x000066
 
 
 
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000030      
-            49 out of 1094 program addresses used, program memory utilization is 4%
+                            0x000000    0x000032      
+            51 out of 1094 program addresses used, program memory utilization is 4%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                acendeLed   0x000022    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-           acendeLed_loop   0x000024    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                acendeLed   0x000024    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+           acendeLed_loop   0x000026    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                  apagaLed   0x00001d    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-            apagaLed_loop   0x00001f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-                      cmp   0x000027    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+            apagaLed_loop   0x000021    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                      cmp   0x000029    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                   inicial   0x00000a    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-                    maior   0x00002f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                    maior   0x000031    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                manutencao   0x000017    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
           manutencao_loop   0x00001a    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-              menor_igual   0x00002d    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+              menor_igual   0x00002f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                    passar   0x000011    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
               passar_loop   0x000014    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                  setports   0x000000    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
@@ -46,11 +46,11 @@ Linker Map File - Created Thu Mar 31 14:09:42 2016
                manutencao   0x000017    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
           manutencao_loop   0x00001a    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
                  apagaLed   0x00001d    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-            apagaLed_loop   0x00001f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-                acendeLed   0x000022    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-           acendeLed_loop   0x000024    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-                      cmp   0x000027    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-              menor_igual   0x00002d    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
-                    maior   0x00002f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+            apagaLed_loop   0x000021    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                acendeLed   0x000024    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+           acendeLed_loop   0x000026    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                      cmp   0x000029    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+              menor_igual   0x00002f    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
+                    maior   0x000031    program     static C:\Users\Herlan\Desktop\Arquitetura\Codigo MPLAB\cod.asm
 
 

@@ -1,4 +1,4 @@
 Warning[207] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 6 : Found label after column 1. (num_acc)
-Message[302] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 48 : Using default destination of 1 (file).
+Message[302] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 22 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\USERS\HERLAN\DESKTOP\ARQUITETURA\CODIGO MPLAB\COD.ASM 47 : Using default destination of 1 (file).
