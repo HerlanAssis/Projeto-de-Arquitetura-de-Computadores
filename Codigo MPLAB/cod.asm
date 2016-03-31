@@ -4,7 +4,7 @@
 			
 			;Espaço das variáveis
 			num_acc equ	  0x20 ;pode declarar variáveis em 0x21, 0x22 ...
-			
+			delayl  equ   0x30
 ;----------------------------------------------------------------------------------------------
 ;Não editar esta seção
 ;----------------------------------------------------------------------------------------------			
@@ -66,6 +66,9 @@ manutencao_loop
 
 apagaLed	bcf   PORTA,0;liga led vermelho
 			bcf   PORTA,1;liga led verde
+			btfss PORTB,6
+			goto  inicial
+				
 
 apagaLed_loop
 			btfss PORTB,6;checa se o botão do 'manutenção' permanece ligado
@@ -77,10 +80,12 @@ acendeLed	bsf   PORTA,0;liga led vermelho
 			bsf   PORTA,1;liga led verde
 
 acendeLed_loop
-		btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
-		call apagaLed;verificação da variavel 0x20
+			btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
+			call apagaLed;verificação da variavel 0x20
 		
-		goto acendeLed_loop
+			goto acendeLed_loop
+
+
 
 
 ;---------------------------------------------------------------------------------------------			
@@ -108,5 +113,6 @@ menor_igual
 maior
 			call acendeLed
    			retlw 1 ;retorna da função com o w_reg com valor 1
+
 			
             END
