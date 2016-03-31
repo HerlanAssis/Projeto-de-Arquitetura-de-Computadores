@@ -42,11 +42,11 @@ inicial
 
 			goto	inicial
 			
-			
 
 passar		bcf		PORTA,0	;Desliga apenas o led vermelho (conectado ao RA0)
 			bsf		PORTA,1	;Liga apenas o led verde (conectado ao RA1)
 			incf    num_acc ;incrementa 1 sempre que o botão é ligado
+
 passar_loop			
 			btfss	PORTB,5 ;checa se o botão do 'sensor' permanece ligado
 			return			;se não permanece, retorne a subrotina de origem			
@@ -54,16 +54,33 @@ passar_loop
 			goto	passar_loop
 
 
+manutencao  bcf   PORTA,0; Desliga led vermelho
+			bcf   PORTA,1; Desliga led verde
+			call cmp
 
-
-manutencao  bcf   PORTA,0
-			bcf   PORTA,1 
 manutencao_loop
-			btfss PORTB,6
-			return
+			btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
+			return; Verificação da variavel 0x20
 
-			goto manutencao_loop 			
+			goto manutencao_loop
+
+apagaLed	bcf   PORTA,0;liga led vermelho
+			bcf   PORTA,1;liga led verde
+
+apagaLed_loop
+			btfss PORTB,6;checa se o botão do 'manutenção' permanece ligado
+			return; Verificação da variavel 0x20
 			
+			goto apagaLed_loop
+
+acendeLed	bsf   PORTA,0;liga led vermelho
+			bsf   PORTA,1;liga led verde
+
+acendeLed_loop
+		btfss PORTB,6; Checa se o botão do 'manutenção' permanece ligado
+		call apagaLed;verificação da variavel 0x20
+		
+		goto acendeLed_loop
 
 
 ;---------------------------------------------------------------------------------------------			
@@ -85,10 +102,11 @@ cmp
    			;se chegar aqui 'num_acc' é menor que 10
    			;retlw 0
 menor_igual
+			call apagaLed
    			retlw 0 ;retorna da função com o w_reg com valor 0
 
 maior
+			call acendeLed
    			retlw 1 ;retorna da função com o w_reg com valor 1
-			
 			
             END
